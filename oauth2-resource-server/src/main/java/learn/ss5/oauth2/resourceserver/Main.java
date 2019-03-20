@@ -2,8 +2,15 @@ package learn.ss5.oauth2.resourceserver;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.security.Principal;
+import java.util.Arrays;
 
 @SpringBootApplication
 @RestController
@@ -16,5 +23,15 @@ public class Main {
     @GetMapping("/test")
     public String doGet() {
         return String.valueOf(System.currentTimeMillis());
+    }
+
+    @GetMapping("/userinfo")
+    public UserDetails userDetails(Principal principal) {
+        /*
+         * principal.getName()取的是 claim中的subject
+         * UserDetails userDetails = userService.findByName(principal.getName);
+         */
+        UserDetails userDetails = new User("zhuzhiou", "", Arrays.asList(new SimpleGrantedAuthority("USER")));
+        return userDetails;
     }
 }
