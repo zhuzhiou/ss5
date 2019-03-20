@@ -1,0 +1,12 @@
+server:
+  port: 8082
+logging:
+  level:
+    root: INFO
+    org.springframework: DEBUG
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost/.well-known/jwks.json
