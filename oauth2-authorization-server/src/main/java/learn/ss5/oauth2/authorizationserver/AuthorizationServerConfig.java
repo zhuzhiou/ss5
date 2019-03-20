@@ -25,7 +25,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .secret("test")
                 .authorizedGrantTypes("authorization_code")
                 .autoApprove(true)
-                .redirectUris("http://resourceserver", "http://oauth2client/login/oauth2/code/custom")
+                .redirectUris("http://resourceserver", "http://oauth2client/login/oauth2/code/custom", "http://oauth2login/login/oauth2/code/custom")
                 .authorities("test")
                 .scopes("test");
     }
