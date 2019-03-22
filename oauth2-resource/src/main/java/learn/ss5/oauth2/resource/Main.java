@@ -1,4 +1,4 @@
-package learn.ss5.oauth2.resourceserver;
+package learn.ss5.oauth2.resource;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

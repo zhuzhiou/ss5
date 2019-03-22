@@ -1,4 +1,4 @@
-package learn.ss5.oauth2.authorizationserver;
+package learn.ss5.oauth2.provider;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

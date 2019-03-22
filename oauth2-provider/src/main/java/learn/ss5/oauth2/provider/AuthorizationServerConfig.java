@@ -1,4 +1,4 @@
-package learn.ss5.oauth2.authorizationserver;
+package learn.ss5.oauth2.provider;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,10 +22,11 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
                 .withClient("a3885c28332f11e98285000c29c09b61")
+                .resourceIds("test")
                 .secret("test")
                 .authorizedGrantTypes("authorization_code")
                 .autoApprove(true)
-                .redirectUris("http://resourceserver", "http://oauth2client/login/oauth2/code/custom", "http://oauth2login/login/oauth2/code/custom")
+                .redirectUris("http://oauth2resource", "http://oauth2client/login/oauth2/code/custom", "http://oauth2login/login/oauth2/code/custom", "http://oauth2gateway")
                 .authorities("test")
                 .scopes("test");
     }

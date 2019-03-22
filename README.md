@@ -71,12 +71,114 @@ server {
 127.0.0.1	oauth2login
 ```
 
-## oauth2-authorization-server
+## oauth2-provider
 
-ss5的 `Authorization Server` 特性还在plan中， 这里使用`Spring Security OAuth2`实现。
+> ss5的 `Authorization Server` 特性还在开发中， 这里使用`Spring Security OAuth2`实现
+
+**最小化配置**
+
+1.  打开pom.xml文件，加入`spring-security-oauth2-autoconfigure`
+
+```xml
+<dependency>
+    <groupId>org.springframework.security.oauth.boot</groupId>
+    <artifactId>spring-security-oauth2-autoconfigure</artifactId>
+    <version>2.1.3.RELEASE</version>
+</dependency>
+```
+
+2.  打开`main`函数所在文件，加上`@EnableAuthorizationServer`
+
+```java
+@EnableAuthorizationServer
+@SpringBootApplication
+public class SimpleAuthorizationServerApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(SimpleAuthorizationServerApplication, args);
+    }
+}
+```
+
+3.  编辑`application.yaml`文件，添加`ClientDetails`详细
+
+```yaml
+security:
+  oauth2:
+    client:
+      client-id: helloworld
+      client-secret: helloworld
+```
 
 更多细节请查阅：[https://github.com/spring-projects/spring-security-oauth2-boot](https://github.com/spring-projects/spring-security-oauth2-boot)
 
-## oauth2-resource-server
+## oauth2-resource
+
+**最小化配置**
+
+1. 打开`pom.xml`文件，添加`spring-boot-starter-oauth2-resource-server`
+
+```
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+</dependency>
+```
+
+2.  重载 `Boot Auto Configuration`的默认配置，添加`oauth2ResourceServer` 方法
+```
+@EnableWebSecurity
+public class MyCustomSecurityConfiguration extends WebSecurityConfigurerAdapter {
+    protected void configure(HttpSecurity http) {
+        http
+            .authorizeRequests()
+                .anyRequest().authenticated()
+                .and()
+            .oauth2ResourceServer()
+                .jwt();
+    }
+}
+```
+
+3. 打开`application.yaml`文件，设置`jwk-set-uri`
+
+```
+security:
+  oauth2:
+    resourceserver:
+      jwt:
+        jwk-set-uri: https://idp.example.com/.well-known/jwks.json
+```
 
 ## oauth2-client
+
+## oauth2-login
+
+**最小化配置**
+
+1. 打开`pom.xml`文件，添加`spring-boot-starter-oauth2-client`
+
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-oauth2-client</artifactId>
+</dependency>
+```
+
+2. 重载 `Boot Auto Configuration`的默认配置，添加`oauth2Login` 方法
+
+```
+
+```
+
+3. 打开application.yaml文件，配置`ClientRegistration`
+
+```yaml
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: d74141bd4e9396138ccc
+            client-secret: 3907354b4e35be34165bc9880441ab1724e589a6
+```

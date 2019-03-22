@@ -1,4 +1,4 @@
-package learn.ss5.oauth2.authorizationserver;
+package learn.ss5.oauth2.provider;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

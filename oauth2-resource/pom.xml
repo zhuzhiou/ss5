@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>learn.ss5</groupId>
-    <artifactId>oauth2-resource-server</artifactId>
+    <artifactId>oauth2-resource</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>资源服务器</name>
 
