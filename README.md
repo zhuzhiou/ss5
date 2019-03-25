@@ -149,8 +149,6 @@ security:
         jwk-set-uri: https://idp.example.com/.well-known/jwks.json
 ```
 
-## oauth2-client
-
 ## oauth2-login
 
 **最小化配置**
@@ -166,8 +164,21 @@ security:
 
 2. 重载 `Boot Auto Configuration`的默认配置，添加`oauth2Login` 方法
 
-```
+```java
+@Configuration
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        //formatter:off
+        http
+            .authorizeRequests()
+                .anyRequest()
+                .authenticated()
+                .and()
+            .oauth2Login();
+    }
+}
 ```
 
 3. 打开application.yaml文件，配置`ClientRegistration`
@@ -182,3 +193,7 @@ spring:
             client-id: d74141bd4e9396138ccc
             client-secret: 3907354b4e35be34165bc9880441ab1724e589a6
 ```
+
+## oauth2-client
+
+WebClient是从Spring WebFlux 5.0版本开始提供的一个非阻塞的基于响应式编程的进行Http请求的客户端工具。

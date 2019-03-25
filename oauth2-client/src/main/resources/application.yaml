@@ -16,9 +16,11 @@ spring:
             scope: test
         provider:
           custom:
-            authorization-uri: http://authorizationserver/oauth/authorize
-            token-uri: http://authorizationserver/oauth/token
+            authorization-uri: http://oauth2provider/oauth/authorize
+            token-uri: http://oauth2provider/oauth/token
             jwk-set-uri: http://localhost/.well-known/jwks.json
+            user-info-uri: http://oauth2resource/userinfo
+            user-name-attribute: username
 logging:
   level:
     root: INFO

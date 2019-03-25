@@ -23,8 +23,8 @@ public class Main {
         SpringApplication.run(Main.class, args);
     }
 
-    @GetMapping("/test")
-    public String doGet() {
+    @GetMapping("/helloworld")
+    public String helloworld() {
         return String.valueOf(System.currentTimeMillis());
     }
 
