@@ -12,14 +12,14 @@ spring:
             client-authentication-method: basic
             authorization-grant-type: authorization_code
             authentication-method: header
-            redirect-uri: http://oauth2client/login/oauth2/code/custom
+            redirect-uri: http://oauth2client.local/login/oauth2/code/custom
             scope: test
         provider:
           custom:
-            authorization-uri: http://oauth2provider/oauth/authorize
-            token-uri: http://oauth2provider/oauth/token
-            jwk-set-uri: http://localhost/.well-known/jwks.json
-            user-info-uri: http://oauth2resource/userinfo
+            authorization-uri: http://oauth2provider.local/oauth/authorize
+            token-uri: http://oauth2provider.local/oauth/token
+            jwk-set-uri: http://oauth2provider.local/.well-known/jwks
+            user-info-uri: http://oauth2resource.local/userinfo
             user-name-attribute: username
 logging:
   level:

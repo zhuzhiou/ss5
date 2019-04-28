@@ -21,7 +21,7 @@ Cookie有两个很重要的属性:Domain和Path，用来指示此Cookie的作用
 ```
 server {
     listen 80;
-    server_name oauth2provider;
+    server_name oauth2provider.local;
 
     location / {
         proxy_pass http://127.0.0.1:8081/;
@@ -31,7 +31,7 @@ server {
 
 server {
     listen 80;
-    server_name oauth2resource;
+    server_name oauth2resource.local;
 
     location / {
         proxy_pass http://127.0.0.1:8082/;
@@ -42,7 +42,7 @@ server {
 
 server {
     listen 80;
-    server_name oauth2client;
+    server_name oauth2client.local;
 
     location / {
         proxy_pass http://127.0.0.1:8083/;
@@ -52,7 +52,7 @@ server {
 
 server {
     listen 80;
-    server_name oauth2login;
+    server_name oauth2login.local;
 
     location / {
         proxy_pass http://127.0.0.1:8084/;
@@ -65,10 +65,10 @@ server {
 **DNS配置**
 
 ```
-127.0.0.1	oauth2provider
-127.0.0.1	oauth2resource
-127.0.0.1	oauth2client
-127.0.0.1	oauth2login
+127.0.0.1	oauth2provider.local
+127.0.0.1	oauth2resource.local
+127.0.0.1	oauth2client.local
+127.0.0.1	oauth2login.local
 ```
 
 ## oauth2-provider

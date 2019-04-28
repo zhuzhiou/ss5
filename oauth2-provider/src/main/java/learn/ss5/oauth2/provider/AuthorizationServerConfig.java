@@ -32,7 +32,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .secret("test")
                 .authorizedGrantTypes("authorization_code")
                 .autoApprove(true)
-                .redirectUris("http://oauth2resource", "http://oauth2client/login/oauth2/code/custom", "http://oauth2login/login/oauth2/code/custom", "http://oauth2gateway")
+                .redirectUris("http://oauth2resource.local", "http://oauth2client.local", "http://oauth2client.local/login/oauth2/code/custom", "http://oauth2login.local/login/oauth2/code/custom", "http://oauth2gateway.local")
                 .authorities("test")
                 .scopes("test");
     }
@@ -48,14 +48,18 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     }
 
     @Bean
-    public JwtAccessTokenConverter tokenEnhancer() throws NoSuchAlgorithmException {
+    public KeyPair keyPair() throws NoSuchAlgorithmException {
         SecureRandom secureRandom = new SecureRandom("ss5".getBytes());
         KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance("RSA");
         keyPairGen.initialize(1024, secureRandom);
         KeyPair keyPair = keyPairGen.generateKeyPair();
+        return keyPair;
+    }
 
+    @Bean
+    public JwtAccessTokenConverter tokenEnhancer() throws NoSuchAlgorithmException {
         JwtAccessTokenConverter tokenEnhancer = new JwtAccessTokenConverter();
-        tokenEnhancer.setKeyPair(keyPair);
+        tokenEnhancer.setKeyPair(keyPair());
 
         DefaultAccessTokenConverter accessTokenConverter = new DefaultAccessTokenConverter();
         accessTokenConverter.setUserTokenConverter(new SubjectAttributeUserTokenConverter());

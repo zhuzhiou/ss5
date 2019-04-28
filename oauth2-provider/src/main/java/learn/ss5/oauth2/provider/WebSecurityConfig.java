@@ -12,7 +12,7 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/favicon.ico");
+        web.ignoring().antMatchers("/favicon.ico", "/error", "/.well-known/*");
     }
 
     @Override

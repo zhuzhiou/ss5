@@ -17,10 +17,15 @@ public class RegisteredOAuth2AuthorizedClientController {
     private WebClient webClient;
 
     @GetMapping("/")
+    public Mono<String> helloworld() {
+        return Mono.just("http://oauth2client.local/authorizedClient");
+    }
+
+    @GetMapping("/authorizedClient")
     public Mono<String> helloworld(@RegisteredOAuth2AuthorizedClient OAuth2AuthorizedClient authorizedClient) {
         Mono<String> mono = this.webClient
                 .get()
-                .uri("http://oauth2resource/helloworld")
+                .uri("http://oauth2resource.local/helloworld")
                 .attributes(oauth2AuthorizedClient(authorizedClient))
                 .retrieve()
                 .bodyToMono(String.class);

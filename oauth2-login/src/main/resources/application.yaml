@@ -19,7 +19,7 @@ spring:
           custom:
             authorization-uri: http://oauth2provider/oauth/authorize
             token-uri: http://oauth2provider/oauth/token
-            jwk-set-uri: http://localhost/.well-known/jwks.json
+            jwk-set-uri: http://oauth2provider.local/.well-known/jwks
             user-info-uri: http://oauth2resource/userinfo
             user-name-attribute: username
 server:
