@@ -40,6 +40,9 @@ public class ShowcaseController {
 
     private Map<String, OAuth2AuthorizationRequest> authorizationRequestRegistry = new HashMap<>();
 
+    /**
+     * 生成类似 <code>http://localhost:8084/oauth/authorize?response_type=code&client_id=d11fdc32ec8d11e8be7628d244f87815&state=aert&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2F</code> 的路径
+     */
     @GetMapping(value = "/oauth")
     public RedirectView authorizeRedirect() {
         ClientRegistration clientRegistration = clientRegistrationRepository.findByRegistrationId("custom");
@@ -59,6 +62,9 @@ public class ShowcaseController {
         return new RedirectView(authorizationRequest.getAuthorizationRequestUri());
     }
 
+    /**
+     * 接收授权后的请求，请求地址类似：http://localhost:8080/?code=iUeKd&state=Hei5x
+     */
     @GetMapping(value = "/oauth", params = "code")
     @ResponseBody
     public OAuth2User authorizeCallback(@RequestParam String code, @RequestParam String state) {
@@ -67,7 +73,7 @@ public class ShowcaseController {
 
         OAuth2AuthorizationResponse authorizationResponse =
                 OAuth2AuthorizationResponse.success(code)
-                        // 这里用来匹对 OAuth2AuthorizationRequest 的 redirectUri，作校验用
+                        // 这里用来对比 OAuth2AuthorizationRequest 的 redirectUri
                         .redirectUri(ServletUriComponentsBuilder.fromCurrentRequestUri().build().toUriString())
                         .state(state)
                         .build();
